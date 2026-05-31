@@ -14,7 +14,6 @@ def publisher():
         topico = "PAR" if num % 2 == 0 else "IMPAR"
         
         print(f"[Publicador] Enviando para o tópico {topico}: {num}")
-        # Enviamos o tópico como string e o número no payload
         socket.send_string(topico, zmq.SNDMORE)
         socket.send(pickle.dumps(num))
         
