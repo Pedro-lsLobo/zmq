@@ -1,27 +1,33 @@
 import zmq
+import math
+import pickle
 
 def server():
     context = zmq.Context()
-    socket = context.socket(zmq.REP)  # Cria o socket de resposta (Reply)
-    
-    # Usando a porta 5678 que está liberada no seu intervalo da AWS
+    socket = context.socket(zmq.REP)
     socket.bind("tcp://*:5678")
-    print("Servidor rodando e aguardando conexões na porta 5678...")
+    print("[Servidor] Pronto para receber requisições matemáticas na porta 5678...")
 
     while True:
-        message = socket.recv()  # Aguarda a mensagem do cliente
-        message_str = message.decode()
+        message = socket.recv()
+        data = pickle.loads(message)
         
-        if "STOP" in message_str:
-            print("Comando STOP recebido. Encerrando servidor.")
-            socket.send(b"Servidor finalizado")
+        if data == "STOP":
+            socket.send(pickle.dumps("Servidor finalizado"))
             break
             
-        # Nova funcionalidade: Retorna a string modificada + o tamanho dela
-        print(f"Recebido: {message_str}")
-        reply = f"{message_str}* (Tamanho: {len(message_str)})"
+        num = data.get("numero")
+        print(f"[Servidor] Processando o número: {num}")
         
-        socket.send(reply.encode())
+        # Funcionalidade Matemática
+        resposta = {
+            "original": num,
+            "quadrado": num ** 2,
+            "cubo": num ** 3,
+            "raiz_quadrada": round(math.sqrt(num), 4)
+        }
+        
+        socket.send(pickle.dumps(resposta))
 
 if __name__ == "__main__":
     server()
