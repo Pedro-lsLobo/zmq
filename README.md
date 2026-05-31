@@ -5,8 +5,8 @@ As aplicacoes foram configuradas de forma estatica para operar no seguinte cenar
 | Instancia | IP Publico / IP de Rede | Papel no Ecossistema | Portas Utilizadas |
 | :--- | :--- | :--- | :--- |
 | **Servidor Central** | 3.227.138.6 | Concentrador de Binds / Processamento Intermediario | 5678, 5679 |
-| **Peer 1** | 3.235.239.109 | Cliente / Consumidor Final / Assinante 1 | Conecta no Server |
-| **Peer 2** | 100.52.205.229 | Produtor / Assinante 2 | Conecta no Server |
+| **Peer 1** | 98.93.87.63 | Cliente / Consumidor Final / Assinante 1 | Conecta no Server |
+| **Peer 2** | 44.220.64.119 | Produtor / Assinante 2 | Conecta no Server |
 
 ---
 
