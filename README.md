@@ -5,8 +5,8 @@ As aplicacoes foram configuradas de forma estatica para operar no seguinte cenar
 | Instancia | IP Publico / IP de Rede | Papel no Ecossistema | Portas Utilizadas |
 | :--- | :--- | :--- | :--- |
 | **Servidor Central** | 3.227.138.6 | Concentrador de Binds / Processamento Intermediario | 5678, 5679 |
-| **Peer 1** | 98.93.87.63 | Cliente / Consumidor Final / Assinante 1 | Conecta no Server |
-| **Peer 2** | 44.220.64.119 | Produtor / Assinante 2 | Conecta no Server |
+| **Peer 1** | ---- | Cliente / Consumidor Final / Assinante 1 | Conecta no Server |
+| **Peer 2** | ---- | Produtor / Assinante 2 | Conecta no Server |
 
 ---
 
@@ -38,29 +38,29 @@ Modelo assincrono de difusao de dados baseado em Filtros por Propriedades Numeri
 Para testar os cenarios, acesse suas instancias via SSH, navegue ate a pasta do respectivo padrao e execute os comandos respeitando a ordem descrita abaixo para evitar falhas na descoberta de rota.
 
 ### Executando Cliente-Servidor
-1. No Servidor (3.227.138.6):
+1. No Servidor:
    python3 client-server/server.py
 
 2. No Peer 1 ou Peer 2:
    python3 client-server/client.py
 
 ### Executando o Pipeline de 3 Processos (Produtor-Consumidor)
-1. No Servidor (3.227.138.6) - Inicializa o no central do pipeline:
+1. No Servidor - Inicializa o no central do pipeline:
    python3 pipeline_producer-consumer/worker_intermediate.py
 
-2. No Peer 1 (3.235.239.109) - Inicializa o consumidor final:
+2. No Peer 1 - Inicializa o consumidor final:
    python3 pipeline_producer-consumer/consumer_final.py
 
-3. No Peer 2 (100.52.205.229) - Inicializa a geracao de carga:
+3. No Peer 2 - Inicializa a geracao de carga:
    python3 pipeline_producer-consumer/producer.py
 
 ### Executando o Publish-Subscribe
-1. No Peer 1 (3.235.239.109) - Ativa a escuta de Pares:
+1. No Peer 1 - Ativa a escuta de Pares:
    python3 pub-sub/sub_even.py
 
-2. No Peer 2 (100.52.205.229) - Ativa a escuta de Impares:
+2. No Peer 2 - Ativa a escuta de Impares:
    python3 pub-sub/sub_odd.py
 
-3. No Servidor (3.227.138.6) - Inicia a transmissao de dados:
+3. No Servidor - Inicia a transmissao de dados:
    python3 pub-sub/publisher.py
 
